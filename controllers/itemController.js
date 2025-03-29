@@ -19,3 +19,12 @@ exports.addItem = async (req, res) => {
     res.status(500).send('Error saving item');
   }
 };
+
+exports.deleteItem = async (req, res) => {
+  try {
+    await Item.deleteOne({ name: req.body.name });
+    res.redirect('/');
+  } catch (err) {
+    res.status(500).send('Error deleting item');
+  }
+};

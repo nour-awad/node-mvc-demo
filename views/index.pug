@@ -1,14 +1,27 @@
 doctype html
 html
   head
-    title MVC Example
+    title Nour's Edits
     link(rel="stylesheet" href="/style.css")
   body
-    h1 Item List
-    ul
-      each item in items
-        li= item.name
-    form(action="/add" method="POST")
-      input(type="text" name="name" placeholder="Enter item" required)
-      button(type="submit") Add Item
+    .container
+      h1 Item List
+      
+      form.add-form(action="/add" method="POST")
+        input(type="text" name="name" placeholder="Enter item" required)
+        button(type="submit") Add Item
+      
+      .items-box
+        h2 Added Items
+        if items && items.length > 0
+          ul.items-list
+            each item in items
+              li.item
+                span.item-name= item.name
+                form.delete-form(action="/delete" method="POST")
+                  input(type="hidden" name="name" value=item.name)
+                  button.delete-btn(type="submit") Delete
+        else
+          p.no-items No items added yet.
+    
     script(src="/script.js")
